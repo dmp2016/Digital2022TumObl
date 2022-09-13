@@ -168,8 +168,8 @@ write_csv2(df_result_1, "result_1.csv")
 # Подход №2. ----
 # Предлагаем книги тех авторов, которые читатель уже читал ранее
 
-df_train_trans_oper <- df_train_trans_train  # Для оценки методики - часть датасета
-# df_train_trans_oper <- df_train_trans  # Для финальных вычислений - полный датасет
+# df_train_trans_oper <- df_train_trans_train  # Для оценки методики - часть датасета
+df_train_trans_oper <- df_train_trans  # Для финальных вычислений - полный датасет
 
 # Строим для каждого пользователя список авторов, которых он читал ранее, 
 # подсчитывая сколько раз были взяты книги каждого автора.
@@ -236,8 +236,8 @@ write_csv2(df_result_2, "result_2.csv")
 # Подход №3. ----
 # Предлагаем книги, которые чаще всего берут вместе с теми, которые были взяты читателем ранее
 
-df_train_trans_oper <- df_train_trans_train  # Для оценки методики - часть датасета
-#df_train_trans_oper <- df_train_trans  # Для финальных вычислений - полный датасет
+# df_train_trans_oper <- df_train_trans_train  # Для оценки методики - часть датасета
+df_train_trans_oper <- df_train_trans  # Для финальных вычислений - полный датасет
 # 
 # # Оценим, сколько книг взял каждый читатель
 # df_train_trans_grp_chb <- df_train_trans_oper %>% 
