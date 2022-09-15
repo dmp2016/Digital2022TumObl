@@ -2,7 +2,6 @@ library(readr)
 library(dplyr)
 library(lubridate)
 
-
 # Чтение и подготовка данных
 
 df_users <- read_csv2("train/users.csv", 
@@ -159,7 +158,7 @@ df_result_1 <- df_result_1 %>%
 calc_metrics(df_result_1, df_train_trans_test)
 
 # Сохраняем результат
-write_csv2(df_result_1, "result_1.csv")
+# write_csv2(df_result_1, "result_1.csv")
 # Score на публичном датасете: Score = 0.000480
 
 # rm(df_result)
@@ -228,7 +227,7 @@ calc_metrics(df_result_2, df_train_trans_test)
 # Score = 0.019120
 # 0.003124487
 
-write_csv2(df_result_2, "result_2.csv")
+# write_csv2(df_result_2, "result_2.csv")
 
 # rm(df_user_author, df_items_book_cnt, df_user_author_book, df_user_author_book_cut, df_result)
 
@@ -305,12 +304,12 @@ df_result_3 <- df_user_rel_cut %>%
 
 calc_metrics(df_result_3, df_train_trans_test)
 
-write_csv2(df_result_3, "result_3.csv")
+# write_csv2(df_result_3, "result_3.csv")
 
 # rm(df_book_rel, df_user_rel, df_user_rel_cut, df_result)
 
 
-# Подход 4. КомбинацияПодхода1, Подхода2 и подхода 3
+# Подход 4. Комбинация Подхода1, Подхода2 и Подхода 3
 
 
 df_result_4_2 <- df_result_2 %>% mutate(res_type = 2)
@@ -325,9 +324,9 @@ df_result_4 <- rbind(df_result_4_2, df_result_4_3)
 
 df_result_4_1 <- df_result_1 %>% 
   mutate(res_type = 4) %>% 
-  left_join(df_result_4 %>% mutate(is_res_4 = T)) %>% 
-  filter(is.na(is_res_4)) %>% 
-  select(-is_res_4)
+  left_join(df_result_2 %>% mutate(is_res_2 = T)) %>% 
+  filter(is.na(is_res_2)) %>% 
+  select(-is_res_2)
   
 df_result_4 <- rbind(df_result_4, df_result_4_1) %>% 
   group_by(chb) %>% 
@@ -338,5 +337,9 @@ df_result_4 <- rbind(df_result_4, df_result_4_1) %>%
   arrange(chb)
 
 
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Запись финального результата ----
+
 write_csv2(df_result_4, "result_4.csv")
 
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
